@@ -3,7 +3,6 @@ name: Build PowerItems
 on:
   push:
     branches: [ main, master ]
-  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -24,19 +23,8 @@ jobs:
       - name: Plugin bauen
         run: mvn -B package
 
-      - name: Resource Pack zippen
-        run: |
-          cd resourcepack
-          zip -r ../PowerItems-ResourcePack.zip .
-
       - name: Plugin-JAR hochladen
         uses: actions/upload-artifact@v4
         with:
           name: PowerItems-Plugin
           path: target/PowerItems.jar
-
-      - name: Resource Pack hochladen
-        uses: actions/upload-artifact@v4
-        with:
-          name: PowerItems-ResourcePack
-          path: PowerItems-ResourcePack.zip
